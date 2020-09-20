@@ -198,6 +198,9 @@ namespace SR
                 {
                     using (IModel chanell = connection.CreateModel())
                     {
+                        props = chanell.CreateBasicProperties();
+                        props.DeliveryMode = 2;
+                        props.Persistent = true;
                         Byte[] body = Encoding.UTF8.GetBytes(message);
                         chanell.BasicPublish(Exchange, RoutingKey, props, body);
 
@@ -230,6 +233,9 @@ namespace SR
                 {
                     using (IModel lchanell = lconnection.CreateModel())
                     {
+                        props = lchanell.CreateBasicProperties();
+                        props.DeliveryMode = 2;
+                        props.Persistent = true;
                         Byte[] lbody = Encoding.UTF8.GetBytes(lmessage);
                         lchanell.BasicPublish(lExchange, lRoutingKey, props, lbody);
 
